@@ -1,0 +1,11 @@
+.input_fie input{
+    border-radius: 10px;
+    opacity: 0.2;
+    width: 20rem;
+    padding: 6px 0;
+    border: 1px solid rgb(57, 46, 46);
+    
+}
+.input_fie input:hover{
+    border: 1px solid rgb(239, 234, 234);
+}

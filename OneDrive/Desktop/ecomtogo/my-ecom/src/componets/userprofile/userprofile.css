@@ -1,0 +1,30 @@
+.pictu {
+    height: 40px;
+    width: 40px;
+    border-radius: 360px;
+    
+}
+
+.menus {
+    max-width: 12rem;
+    position: relative;
+    right: 5rem
+    /* justify-content: center; */
+}
+
+.menus ul li {
+    list-style: none;
+    text-align: center;
+}
+
+.logout {
+    position: absolute;
+}
+
+.user_profile{
+    position: relative;
+    /* left: 2rem; */
+    right: 6rem;
+    bottom: 20px;
+    
+}

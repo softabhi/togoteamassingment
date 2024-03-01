@@ -1,0 +1,39 @@
+#rating{
+    max-width: 5rem;
+}
+
+
+.cart_item{
+    
+
+}
+.card-img{
+    height: 18rem;
+    
+}
+.action-btn{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+.card-img:hover {
+  transform: scale(1.05);
+}
+img{
+    transition: all 0.3s ease-out 0s;
+}
+.top_heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#heart:hover{
+   /* background-color: rgb(242, 57, 11);
+   border-radius: 180%;
+   padding: 10px;
+   color: black; */
+   transform: scale(1.5);
+}
+#share{
+  
+}

@@ -1,0 +1,16 @@
+.user_icon{
+    position: relative;
+    /* left: 2rem; */
+    right: 3rem;
+}
+#icon{
+    width: 4rem;
+    height: 2rem;
+}
+.navbar-brand{
+    color: rgb(124, 240, 8);
+    font-weight: 600;
+}
+.navbar{
+    position: sticky;
+}
