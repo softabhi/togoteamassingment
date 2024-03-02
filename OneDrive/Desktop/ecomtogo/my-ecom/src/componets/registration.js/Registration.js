@@ -16,111 +16,199 @@ import {
 
 function Registration() {
 
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    repassword: ""
-  })
-  const [isValid, setIsValid] = useState(true);
-  const [passMatch, setPassMatch] = useState(true)
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   repassword: ""
+  // })
+  // const [isValid, setIsValid] = useState(true);
 
-  const [errors, setErrors] = useState({
+
+  // const [errors, setErrors] = useState({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   repassword: ''
+  // });
+
+
+  // const handleChange = (e) => {
+
+  //   const { name, value } = e.target;
+
+  //   setUser({ ...user, [name]: value })
+
+  //   validateInput(name, value);
+
+  // }
+
+  // const validateInput = (name, value) => {
+  //   switch (name) {
+  //     case 'name':
+  //       setErrors((prevErrors) => ({
+  //         ...prevErrors,
+  //         name: value.length < 3 ? 'name must be at least 3 characters' : '',
+  //       }));
+  //       break;
+  //     case 'email':
+  //       // You can use a library like validator or regex for email validation
+  //       setErrors((prevErrors) => ({
+  //         ...prevErrors,
+  //         email: value.length > 0 && !validateEmail(value) ? 'Invalid email address' : '',
+  //       }));
+  //       break;
+  //     case 'password':
+  //       setErrors((prevErrors) => ({
+  //         ...prevErrors,
+  //         password: value.length < 6 ? 'Password must be at least 6 characters' : '',
+  //       }));
+  //       break;
+  //     case 'repassword':
+  //       setErrors((prevErrors) => ({
+  //         ...prevErrors,
+  //         repassword: value !== user.password ? 'Passwords do not match' : '',
+  //       }));
+  //       break
+  //     default:
+  //     break
+  //   }
+  // };
+
+
+
+  // const validateEmail = () => {
+  //   // Regular expression for basic email validation
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   setIsValid(emailRegex.test(user.email));
+  // };
+
+
+  // // const passwordMatch = ()=>{
+  // //   setPassMatch(false)
+  // // }
+
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   console.log("hello")
+  //   console.log(user)
+
+  //   const { name, email, password, repassword } = user;
+
+  //   // if (name && email && (password === repassword)) {
+
+  //   if (Object.values(errors).every((error) => error === '')) {
+  //     // Perform form submission logic here
+  //     // console.log('Form submitted:', user);
+
+
+  //     console.log("userrr")
+  //     try {
+  //       const response = await axios.post('http://localhost:8081/register', user);
+  //       console.log(response.data);
+  //       alert(response.data.message)
+  //       // setUser("");
+
+  //     } catch (error) {
+  //       console.error('Error registering user:', error.message);
+  //     }
+
+  //   }
+  //   // }
+  //   else {
+  //     alert("all field required")
+  //   }
+
+
+  // };
+
+
+
+
+  const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
-    repassword: ''
+    repassword: '',
   });
 
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
 
-    validateInput(e.target.name, e.target.value);
-
-  }
-
-  const validateInput = (name, value) => {
-    switch (name) {
-      case 'name':
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          name: value.length < 3 ? 'name must be at least 3 characters' : '',
-        }));
-        break;
-      case 'email':
-        // You can use a library like validator or regex for email validation
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          email: value.length > 0 && !validateEmail(value) ? 'Invalid email address' : '',
-        }));
-        break;
-      case 'password':
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: value.length < 6 ? 'Password must be at least 6 characters' : '',
-        }));
-        break;
-      case 'repassword':
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          repassword: value !== user.password ? 'Passwords do not match' : '',
-        }));
-        break
-      default:
-        break;
+    // Validate name
+    if (!user.name.trim()) {
+      newErrors.name = 'name is required';
+      isValid = false;
     }
-  };
 
-
-
-  const validateEmail = () => {
-    // Regular expression for basic email validation
+    // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValid(emailRegex.test(user.email));
+    if (!user.email.trim() || !emailRegex.test(user.email.trim())) {
+      newErrors.email = 'Valid email is required';
+      isValid = false;
+    }
+
+    // Validate password
+    if (user.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    // Validate repassword
+    if (user.password !== user.repassword) {
+      newErrors.repassword = 'Passwords do not match';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
-
-
-  // const passwordMatch = ()=>{
-  //   setPassMatch(false)
-  // }
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, email, password, repassword } = user;
-
-    if (name && email && (password === repassword)) {
-
-
+    if (validateForm()) {
+      // Form submission logic (e.g., sending data to server)
+      console.log('Form is valid. Submitting data:', user);
 
 
+      try {
+        const response = await axios.post('http://localhost:8081/register', user);
+        console.log(response.data);
+        alert(response.data.message)
+        setUser({
+          name: '',
+          email: '',
+          password: '',
+          repassword: '',
+        });
 
-      if (Object.values(errors).every((error) => error === '')) {
-        // Perform form submission logic here
-        // console.log('Form submitted:', user);
-
-
-
-        try {
-          const response = await axios.post('http://localhost:8081/register', user);
-          console.log(response.data);
-          alert(response.data.message)
-          // setUser("");
-
-        } catch (error) {
-          console.error('Error registering user:', error.message);
-        }
-
+      } catch (error) {
+        console.error('Error registering user:', error.message);
       }
+
+
+
     } else {
-      alert("all field required")
+      console.log('Form is invalid. Please fix errors.');
     }
-
-
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
 
 
   return (
@@ -142,10 +230,11 @@ function Registration() {
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <MDBIcon fas icon="envelope me-3" size='lg' />
-                <MDBInput label='Your Email' id='form2' type='email' name='email' value={user.email} onChange={handleChange} onBlur={validateEmail} />
+                <MDBInput label='Your Email' id='form2' type='email' name='email' value={user.email} onChange={handleChange} />
 
               </div>
-              {!isValid && <p style={{ color: 'red' }}>Invalid email address</p>}
+              {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+              {/* {!isValid && <p style={{ color: 'red' }}>Invalid email address</p>} */}
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <MDBIcon fas icon="lock me-3" size='lg' />
@@ -156,7 +245,7 @@ function Registration() {
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <MDBIcon fas icon="key me-3" size='lg' />
-                <MDBInput label='Repeat your password' id='form4' type='password' name='repassword' value={user.repassword} onChange={handleChange} />
+                <MDBInput label='Repeat your password' id='form4' type='repassword' name='repassword' value={user.repassword} onChange={handleChange} />
               </div>
               {errors.repassword && <p style={{ color: 'red' }}>{errors.repassword}</p>}
 
