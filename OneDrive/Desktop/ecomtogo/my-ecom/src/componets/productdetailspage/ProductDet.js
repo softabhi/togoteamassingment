@@ -14,13 +14,13 @@ export default function ProductDet({ setcartitem }) {
 
     const [currentCart, setCurrentCart] = useState("");
     const [items, setItems] = useState([]);
-    const [addCartitem, setAddCartItem] = useState();
+    // const [addCartitem, setAddCartItem] = useState();
 
     const { productView } = useContext(globleData)
 
-    console.log(productView)
+    // console.log(productView)
 
-    console.log(itemList)
+    // console.log(itemList)
 
 
 
@@ -36,7 +36,7 @@ export default function ProductDet({ setcartitem }) {
             return item.id === productView;
         })
         setCurrentCart(currentItem)
-        console.log(currentItem)
+        // console.log(currentItem)
         //   currentItem()
     }, [productView])
 
@@ -54,7 +54,7 @@ export default function ProductDet({ setcartitem }) {
     //     localStorage.setItem('items', JSON.stringify(items));
     // }, [items]);
 
-    console.log(items)
+    // console.log(items)
 
     return (
         <>

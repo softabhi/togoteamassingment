@@ -29,13 +29,16 @@ const UserProfile = ({ logout }) => {
 //     logout()
 // }
 
+         console.log(logedUser[0].userImg)
+
+
     return (
         <div className='logout me-4'>
             <div className=''>
            
                 <img 
                 ref={imgRef}
-                src={use} 
+                src={`http://localhost:8081/` + logedUser[0].userImg} 
                 alt="" 
                 className='pictu ms' 
                 onClick={ () => setOpen(!open)}

@@ -1,5 +1,12 @@
 #rating{
     max-width: 5rem;
+    
+}
+
+.card_container{
+    position: relative;
+    /* z-index: -1; */
+    /* display: block; */
 }
 
 

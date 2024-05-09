@@ -9,6 +9,7 @@ import Login from './componets/login/Login.js';
 import Navbar from './componets/navbar/Navbar.js';
 import Registration from './componets/registration.js/Registration.js';
 import Cart from './componets/cartprodu/Cart.js';
+import Regi from './componets/registration.js/Regi.jsx';
 
 
 
@@ -36,6 +37,7 @@ const setCart=(id)=>{
 
 const logout = ()=>{
   setLogedUser("")
+  alert("user logout successfully")
 }
 
 useEffect(()=>{

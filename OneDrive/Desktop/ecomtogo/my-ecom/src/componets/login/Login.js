@@ -1,5 +1,5 @@
 import './login.css'
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
 import { Link ,useNavigate} from 'react-router-dom'
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Login = ({ setLogedUser }) => {
 
+  const elem = useRef();
 
   const [userLogin, setUserLogin] = useState(
     {
@@ -18,6 +19,8 @@ const Login = ({ setLogedUser }) => {
   const navigate = useNavigate();
 
 
+  console.log(elem.current)
+
   const handleChange = (e) => {
     setUserLogin({ ...userLogin, [e.target.name]: e.target.value })
   }
@@ -27,9 +30,10 @@ const Login = ({ setLogedUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    elem.current.focus();
 
     try {
-      const response = await axios.post('http://localhost:8081/login', userLogin);
+      const response = await axios.post('http://localhost:8081/api/v1/login', userLogin);
       localStorage.setItem('token', response.data.token);
       console.log(response.data.results);
       setLogedUser(response.data.results);
@@ -53,7 +57,7 @@ const Login = ({ setLogedUser }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name='email' value={userLogin.email} onChange={handleChange} />
+            <input type="email" ref={elem} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name='email' value={userLogin.email} onChange={handleChange} />
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div className="form-group">

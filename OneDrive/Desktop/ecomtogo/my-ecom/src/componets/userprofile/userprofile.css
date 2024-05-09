@@ -8,7 +8,8 @@
 .menus {
     max-width: 12rem;
     position: relative;
-    right: 5rem
+    right: 5rem;
+    /* z-index: 1; */
     /* justify-content: center; */
 }
 

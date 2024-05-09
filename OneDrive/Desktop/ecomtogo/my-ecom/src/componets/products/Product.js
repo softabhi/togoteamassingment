@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 // import '../Style.css';
 import './product.css'
 
@@ -13,6 +13,10 @@ import { globleData } from '../../App.js'
 const Product = ({ productview }) => {
 
     const { searchItem } = useContext(globleData)
+
+    // let listItem = useMemo(()=>{
+        
+    // },[])
 
     const addcart = (id) => {
         productview(id)

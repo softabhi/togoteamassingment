@@ -127,13 +127,16 @@ function Registration() {
 
 
 
-
+  const [profileImg, setProfileImg] = useState("");
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
     repassword: '',
+    userImg: ''
   });
+
+  console.log(profileImg)
 
   const [errors, setErrors] = useState({});
 
@@ -143,6 +146,7 @@ function Registration() {
 
     // Validate name
     if (!user.name.trim()) {
+      console.log(!user.name.trim())
       newErrors.name = 'name is required';
       isValid = false;
     }
@@ -173,13 +177,31 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+
     if (validateForm()) {
       // Form submission logic (e.g., sending data to server)
       console.log('Form is valid. Submitting data:', user);
+      
+      const formData = new FormData();
 
+      const { name, email, password, repassword} = user;
+
+      
+      formData.append('name', user.name)
+      formData.append('email', user.email)
+      formData.append('password', user.password)
+      formData.append('repassword', user.repassword)
+      formData.append('userImg', profileImg)
+
+      console.log(formData)
 
       try {
-        const response = await axios.post('http://localhost:8081/register', user);
+        const response = await axios.post('http://localhost:8081/api/v1/register', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
         console.log(response.data);
         alert(response.data.message)
         setUser({
@@ -187,6 +209,7 @@ function Registration() {
           email: '',
           password: '',
           repassword: '',
+          userImg: ''
         });
 
       } catch (error) {
@@ -248,6 +271,14 @@ function Registration() {
                 <MDBInput label='Repeat your password' id='form4' type='repassword' name='repassword' value={user.repassword} onChange={handleChange} />
               </div>
               {errors.repassword && <p style={{ color: 'red' }}>{errors.repassword}</p>}
+
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <MDBIcon fas icon="key me-3" size='lg' />
+                <MDBInput label='Upload Image' id='form4' type='file' name='userImg' onChange={(e) => setProfileImg(e.target.files[0])} />
+              </div>
+              {errors.repassword && <p style={{ color: 'red' }}>{errors.repassword}</p>}
+
 
 
               <div className='mb-4'>
